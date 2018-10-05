@@ -1,5 +1,5 @@
 # Web-Application-Ads
-Location Based Advertisements
+Location Based Advertisements (Java8, JavaEE, Wildfly, JSF2.2, Hibernate, JPA, EJB, XHTML...)
 
 The project is a web application which aims to show advertisements based on the location of user. Advertisements are defined by the shops and they have a specific time interval. Users are able to list currently available advertisements for any selected distance and category. The web application is compatible with PC, mobile and tablet.
 
