@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:o="http://omnifaces.org/ui"
+	  xmlns:of="http://omnifaces.org/functions"> 
+
+<h:head>
+  <title>List Ads</title>
+  
+  <meta charset="utf-8" content=""/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+ 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/style.css"/> 
+
+</h:head> 
+<h:body> 
+	<br/>
+	<div class="row">
+ 		 <div class="col">
+  			<img src="img/onsalenow_.png" alt="Sales" class="center"/>
+  		</div>
+	</div>
+	<br/>
+	<h:messages styleClass="message"/> 
+
+	<h:form id="adlist" enctype="multipart/form-data" >
+	<b:container class="tablecont"> 
+	<b:row class="row" >
+		
+	 	<b:column col-md="5" >	
+	 		<h:outputText for="category" value="Select Category" style="font-weight:bold"/>
+	 			
+	 		<h:selectOneMenu id="cat" value = "#{listAdsBean.category}" converter="omnifaces.SelectItemsConverter" styleClass="form-control" style="font-size:14px"> 
+				<f:selectItem itemLabel="All" itemDisabled="false" />
+				<f:selectItems value="#{listAdsBean.categories}" var="category" itemValue="#{category}" itemLabel="#{category.category}"/> 
+				</h:selectOneMenu> 	
+				<h:message for="cat" />			
+	 	</b:column>
+		
+	 	<b:column col-md="5" >	
+	 		<h:outputText for="distance" value="Select Distance" style="font-weight:bold"/>
+	 			<h:selectOneMenu id="dist" value = "#{listAdsBean.distance}" converter="omnifaces.SelectItemsConverter" styleClass="form-control" style="font-size:14px" > 
+				<f:selectItem itemLabel="All" itemDisabled="false" />
+				<f:selectItems value="#{listAdsBean.distances}" var="distance" itemValue="#{distance}" itemLabel="#{distance.description}"/> 
+				</h:selectOneMenu> 	
+				<h:message for="dist"/>		 
+	 	</b:column>
+	 	<b:column col-md="2" >
+		   <b:commandButton id="listads" ajax="true" icon-size="2x" iconAwesome="thumbs-up"  title="icon-size='2x'" 
+		   look="primary" value="Show Ads" onclick="#{listAdsBean.listSelectedAds()}" update="adstable" />				
+		</b:column>
+		
+	</b:row>
+
+	</b:container>
+	<br/>
+	<h3 align="center"> <a href="shops.xhtml" style="color:red">Click to see all on the map...</a> </h3>
+	<br/>
+	<b:container >	
+	<b:column col-md="12"  class="table-responsive">
+	<b:row class="tabledata">
+	<b:dataTable id="adstable" value="#{listAdsBean.ads}" var="ads"  responsive="true" style-width="auto" striped="true"
+	 fixedHeader="true"  scroll-size="100%" class="table table-striped table-responsive" autoWidth="true">
+  
+  	<b:dataTableColumn label="Product" custom-options="'width':'auto'" text-align="center">
+        <b:image name="image" value="img_ads/#{ads.pictureName}" style="height:180px;width:180px;"/>       
+    </b:dataTableColumn>
+      
+    <b:dataTableColumn>
+      <f:facet name="header">
+        <ul style="margin-bottom:0;list-style-type:none;padding-left:0">
+          <li>Category</li>
+        </ul>
+     </f:facet>
+      <br/>
+      #{ads.shop.category.category} 
+    </b:dataTableColumn>
+  
+   <b:dataTableColumn>
+      <f:facet name="header">
+        <ul style="margin-bottom:0;list-style-type:none;padding-left:0">
+          <li>Details</li>
+          <li></li>
+        </ul>
+     </f:facet>
+      <br/>
+      #{ads.productName.toUpperCase()}
+      <hr/>
+      #{ads.description}
+    </b:dataTableColumn>
+  
+    <b:dataTableColumn>
+      <f:facet name="header">
+        <ul style="margin-bottom:0;list-style-type:none;padding-left:0">
+         <li>Shop</li>
+        </ul>
+     </f:facet>
+     <br/>
+      #{ads.shop.shopName}   
+    </b:dataTableColumn>
+    
+     <b:dataTableColumn>
+      <f:facet name="header">
+        <ul style="margin-bottom:0;list-style-type:none;padding-left:0">
+          <li>Date</li>
+          <li></li>
+        </ul>
+     </f:facet>
+     <br/>
+     Start	: #{ads.start}
+     <hr/>
+     End	: #{ads.end}
+    </b:dataTableColumn>
+    
+     <b:dataTableColumn>
+      <f:facet name="header">
+        <ul style="margin-bottom:0;list-style-type:none;padding-left:0">
+         <li>Address</li>
+        </ul>
+     </f:facet>
+     <br/>
+     #{ads.shop.address}_ #{ads.shop.district.district}_ #{ads.shop.city.city}
+       <hr/>
+     Phone: #{ads.shop.telephone}   
+    </b:dataTableColumn>
+	  
+    </b:dataTable>	
+	</b:row>
+	</b:column>
+	</b:container>
+	<br/>
+ 	
+ 	<b:container>
+	<div id="map"></div>
+	<script type="text/javascript" src="js/geomap.js" ></script>	
+	<script 
+    src="https://maps.googleapis.com/maps/api/js?key=YOURAPIKEY&amp;callback=initMap" >
+    </script>
+    
+	<h:inputHidden id="lat" value="#{listAdsBean.latitude}" required="true" 
+				requiredMessage="Location is not found. "/>			
+   
+	<h:inputHidden id="lng" value="#{listAdsBean.longitude}" required="true" 
+				requiredMessage="Location is not found. "/>		
+	
+   </b:container>
+   <br/>
+   <b:container>
+   
+   <b:row>
+     <h3 align="center"><b> Register for news! </b></h3>
+   </b:row>
+    <br/>
+    
+    <b:row>
+      <b:column col-md="6" >
+      	
+      <h:outputText value="Name"/>
+	  <h:inputText id="username" value="#{listAdsBean.userName}" styleClass="form-control" style="font-size:14px"/>   
+		 <br/>				
+	 <h:outputText value="Email"/>    
+	 <h:inputText id="usermail" type="email" value="#{listAdsBean.userEmail}" styleClass="form-control" style="font-size:14px"/>
+	 
+	 </b:column>
+			
+	<b:column col-md="6" >	
+	<h:outputText value="Select City"/>
+				<h:selectOneMenu id="city" value = "#{listAdsBean.userCity}" converter="omnifaces.SelectItemsConverter" styleClass="form-control" style="font-size:14px"> 
+				<f:selectItem itemLabel="All" itemDisabled="false" />
+				<f:selectItems value="#{listAdsBean.cities}" var="city" itemValue="#{city}" itemLabel="#{city.city}"/> 
+				</h:selectOneMenu> 	
+	
+    <h:outputText value="Select Category"/>
+   				<h:selectOneMenu id="category" value = "#{listAdsBean.userCategory}" converter="omnifaces.SelectItemsConverter" styleClass="form-control" style="font-size:14px"> 
+				<f:selectItem itemLabel="All" itemDisabled="false" />
+				<f:selectItems value="#{listAdsBean.categories}" var="category" itemValue="#{category}" itemLabel="#{category.category}"/> 
+				</h:selectOneMenu> 	
+    
+	<h:outputText value="Select Shop"/>	
+				<h:selectOneMenu id="shop" value = "#{listAdsBean.shop}" converter="omnifaces.SelectItemsConverter" styleClass="form-control" style="font-size:14px"> 
+				<f:selectItem itemLabel="All" itemDisabled="false" />
+				<f:selectItems value="#{listAdsBean.shops}" var="shop" itemValue="#{shop}" itemLabel="#{shop.shopName}"/> 
+				</h:selectOneMenu> 	
+   
+   </b:column>
+   </b:row>
+   <br/>
+   <b:row>
+   <h:commandButton value="Register" styleClass="btn btn-success btn-lg center" action="#{listAdsBean.registerUser()}" style="font-size:16px"/>
+   </b:row>
+   
+   </b:container>
+   
+ </h:form>    
+</h:body> 
+</html>

@@ -1,0 +1,122 @@
+input[type='file'] {
+  color: transparent;
+}
+
+.tabledata {
+	
+	align-content:center;
+	color: #005392;
+}
+
+.message {
+	text-align:center;
+	font-weight: bold;
+	color:#DE0C4E;
+}
+
+h2 {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.btn-default {
+  
+  width: 30%;
+  background: white;
+  color:gray;
+  font-weight: bold;
+  border-radius: 15px;
+  border-color: white;
+  
+  }
+  
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
+
+
+#map {
+	width:100%;
+	height:400px;
+}  
+
+.header{
+   background-color: #F2F2F2; 
+   color: #81DAF5;
+   padding: 10px;
+   margin: auto;
+   width: 100%;
+   border-radius: 15px;
+}
+
+.container {
+   background-color: #F2F2F2; 
+   color: #005392;
+   padding: 20px;
+   margin: auto;
+   border-radius: 15px;
+   width: 100%;
+   font-size: 16px;
+   font-family: Georgia, serif;
+   border-width: 3px;
+   border-color: #848484;
+}
+
+.tablecont {
+ 	background-color: #F2F2F2;
+	}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+}
+
+/* @media only screen and (max-width: 725px) {
+   width: 50%;
+} */
+
+@media only screen and (min-width: 725px) {
+   width: 50%;
+   margin: auto;
+
+}
+
+@media only screen and (min-width: 750px) {
+  .formId {
+   width: 80%;
+    margin: auto;
+   }
+}
+
+@media only screen and (min-width: 990px) {
+  .formId {
+   width: 50%;
+   margin: auto;
+   }
+}
+
+
+@media only screen and (min-width: 400px) {
+  #loginForm {
+   margin: auto;
+   width: 80%;
+   }
+}
+
+@media only screen and (min-width: 750px) {
+  #loginForm { 
+   width: 50%;
+   margin: auto;
+   }
+}
+
+@media only screen and (min-width: 1050px) {
+  #loginForm {
+   margin: auto;
+   width: 40%;
+   }
+}
+
