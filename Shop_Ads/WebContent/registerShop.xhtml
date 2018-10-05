@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+	  xmlns:of="http://omnifaces.org/functions"
+      xmlns:pm="http://java.sun.com/jsf/core">
+      
+<h:head>
+
+  <title>Shop Registery</title>
+  
+  <meta charset="utf-8" content=""/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+ 
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"/>
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/style.css"/> 
+	<script src="js/lib/jquery-3.1.1.js"></script>
+
+</h:head> 
+
+<h:body>
+
+	<div class="row">
+ 	 	<div class="col">
+			<div class="header" >
+ 				<h2 align="center">Register My Shop</h2>	
+			</div>
+	 	</div>
+	</div>
+
+<br/> 
+
+	<div class="row">
+ 		 <div class="col">
+  			<img src="img/shopping.jpg" alt="Shopping" class="center"/>
+  		</div>
+	</div>
+	
+<br/> 
+<h:messages styleClass="message"/> 
+<h:form id="formId" >
+
+	<div class="container">
+
+	<div class="row"> 
+	   <!-- left column -->
+		<div class="col-sm-6">
+
+				 <h:outputText for="name" value="Shop Name"/>
+				 <h:inputText id="name" value="#{registerShopBean.shopName}" styleClass="form-control" required="true"
+				requiredMessage="Please enter the shop Name"/>   
+						
+				 <h:outputText value="Email"/>    
+				 <h:inputText id="mail" type="email" value="#{registerShopBean.email}" styleClass="form-control" required="true"
+				requiredMessage="Email invalid!">
+	   			 <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+				 </h:inputText> 
+				
+				<h:outputText for="password" value="Password"/>    
+				<h:inputSecret id="password" value="#{registerShopBean.password}" styleClass="form-control" required="true"
+				requiredMessage="Enter password"/>
+					
+				 <h:outputText for="repassword" value="Re-Enter Password"/>
+				 <h:inputSecret id="repassword" value="#{registerShopBean.repassword}" styleClass="form-control" required="true"
+				requiredMessage="Enter repassword" />			
+				  
+				<o:validateEqual components="password repassword"  message="Passwords do not match!" showMessageFor="repassword" />
+			
+				<h:outputText for="city" value="City"/>    
+				<h:selectOneMenu id="city" value="#{registerShopBean.city}" converter="omnifaces.SelectItemsConverter" styleClass="form-control">
+				<f:selectItem itemLabel="Select" itemDisabled="true" />
+				<f:selectItems value="#{registerShopBean.cities}" var="city" itemValue="#{city}" itemLabel="#{city.city}"/> 
+				<f:ajax listener="#{registerShopBean.selectedCity}" render="district"  />
+				</h:selectOneMenu> 
+				<h:message for="city" />
+								
+				<h:outputText for="district" value="District"/>    
+				<h:selectOneMenu id="district"  value="#{registerShopBean.district}" converter="omnifaces.SelectItemsConverter" styleClass="form-control"  >
+				 <f:selectItem itemLabel="Select" itemDisabled="true" /> 
+				<f:selectItems value="#{registerShopBean.districts}" var="district" itemValue="#{district}" itemLabel="#{district.district}"/> 
+				</h:selectOneMenu> 	
+				<h:message for="district" />		
+				
+			</div>
+				
+	   <!-- right column -->
+		<div class="col-sm-6">
+								
+				<h:outputText for="cadde" value="Street Address"/>
+				<h:inputText id="cadde" value="#{registerShopBean.cadde}" styleClass="form-control" required="true"
+				requiredMessage="Please enter street name" />   
+			
+				<h:outputText for="sokak" value="Home Street"/>
+				<h:inputText id="sokak" value="#{registerShopBean.sokak}" styleClass="form-control" required="true"
+				requiredMessage="Please enter home street" />   
+			
+				<h:outputText for="no" value="No"/>
+				<h:inputText id="no" value="#{registerShopBean.no}" styleClass="form-control" required="true"
+				requiredMessage="Please enter no"  />   
+									
+				<h:outputText for="phone" value="Phone"/>
+				<h:inputText id="phone" type="tel" value="#{registerShopBean.telephone}" mask="(999) 999 99 99" styleClass="form-control" required="true"
+				requiredMessage="Please enter phone number" > 
+				<o:validator validatorId="javax.faces.Length" minimum="10" message="Telephone must be at least 10 chars" />
+                <o:validator validatorId="javax.faces.RegularExpression" pattern="\\d+" message="{0} must contain digits only" />  		
+				</h:inputText>
+								
+				<h:outputText for="category" value="Category"/>
+				<h:selectOneMenu id="cat" value = "#{registerShopBean.category}" converter="omnifaces.SelectItemsConverter" styleClass="form-control"  > 
+				<f:selectItem itemLabel="Select" itemDisabled="true" />
+				<f:selectItems value="#{registerShopBean.categories}" var="category" itemValue="#{category}" itemLabel="#{category.category}"/> 
+				</h:selectOneMenu> 	
+				<h:message for="cat" />			
+		</div>
+	</div>
+	
+	<br/>
+	<h5 align="center">Please select your location from the map.</h5>	
+	
+	<div id="map" style="width:100%; height:400px;"></div>
+   <script type="text/javascript" src="js/geomap.js" ></script>	
+	<script 
+    src="https://maps.googleapis.com/maps/api/js?key=YOURAPIKEY&amp;callback=initMap" >
+   </script>	
+   
+			
+	<br/>
+	
+	<div class="row">
+		<div class="col-sm-2">
+		<h:outputText for="latitude" value="Latitude"/>
+		</div>
+		<div class="col-sm-4">
+ 		<h:inputText id="lat" name="Latitude" value="#{registerShopBean.latitude}" styleClass="form-control" />
+ 		<!-- <f:convertNumber minFractionDigits="5" />
+ 		</h:inputText> -->
+ 		</div>
+ 		<div class="col-sm-2">
+ 		<h:outputText for="longitude" value="Longitude"/>
+ 		</div>
+ 		<div class="col-sm-4">
+		<h:inputText id="lng" name="Longitude" value="#{registerShopBean.longitude}" styleClass="form-control" />
+	<!-- 	<f:convertNumber minFractionDigits="5" />
+		</h:inputText> -->
+		</div>
+	</div>
+	 
+      
+	
+	<br/>
+	<div class="row">
+	
+		<h:commandButton value="Register" styleClass="btn btn-success btn-lg center" action="#{registerShopBean.addShop()}"/>
+	</div>
+	
+	<br/>
+ 	<div class="row">
+  		<div class="col">
+                <h5 align="center">If you are already registered, please <a href="login.xhtml">login.</a> </h5> 
+    	</div>
+ 	</div>
+	
+	</div>	
+
+</h:form>
+</h:body> 
+	
+</html>

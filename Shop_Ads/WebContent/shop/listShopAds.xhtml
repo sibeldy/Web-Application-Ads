@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+	  xmlns:of="http://omnifaces.org/functions"
+	  xmlns:b="http://bootsfaces.net/ui"> 
+
+<h:head>
+
+<title>Advertisement</title>
+  
+  <meta charset="utf-8" content=""/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+ 
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"/>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/style_list.css"/> 
+	
+</h:head> 
+<body> 
+
+<div class="row">
+ 	 	<div class="col">
+			<div id="info" class="header" align="center" >		
+ 				<b>Shop:</b> #{listShopAdsBean.loginBean.loggedInShop.shopName.toUpperCase()}, 
+ 				<b>Address:</b> #{listShopAdsBean.loginBean.loggedInShop.address}, 
+ 				<b>Tel:</b> #{listShopAdsBean.loginBean.loggedInShop.telephone},
+ 				<b>Category:</b> #{listShopAdsBean.loginBean.loggedInShop.category.category}
+			</div>
+	 	</div>
+	</div>
+	
+	<br/>
+
+
+<div class="row">
+ 	 	<div class="col">
+			<div  class="header" >
+ 				<h2 align="center"> Ad List</h2>	
+			</div>
+	 	</div>
+	</div>
+	
+	<br/>
+	
+	<h:messages styleClass="message"/> 
+	
+	<h:form id="adlist" enctype="multipart/form-data">
+	
+	<b:container class="tablecont"> 
+		
+	<b:row class="tabledata">
+	<b:column col-md="12"  class="table-responsive">
+	
+	<b:dataTable id="adstable" value="#{listShopAdsBean.ads}" var="ads"  responsive="true" style-width="auto" striped="true"
+	 fixedHeader="true"  scroll-size="100%" class="table table-striped table-responsive" autoWidth="true">
+ 
+  	<b:dataTableColumn label="Product" custom-options="'width':'auto'" text-align="center">
+        <b:image name="image" value="../img_ads/#{ads.pictureName}" style="height:180px;width:180px;"/>       
+    </b:dataTableColumn>
+       
+   <b:dataTableColumn>
+      <f:facet name="header">
+        <ul style="margin-bottom:0;list-style-type:none;padding-left:0">
+          <li>Details</li>
+          <li></li>
+        </ul>
+     </f:facet>
+      <br/>
+      #{ads.productName.toUpperCase()}
+      <hr/>
+      #{ads.description}
+    </b:dataTableColumn>
+ 
+     <b:dataTableColumn>
+      <f:facet name="header">
+        <ul style="margin-bottom:0;list-style-type:none;padding-left:0">
+          <li>Date</li>
+          <li></li>
+        </ul>
+     </f:facet>
+     <br/>
+     Start	: #{ads.start}
+     <hr/>
+     End	: #{ads.end}
+    </b:dataTableColumn>
+   
+    </b:dataTable>	
+	</b:column>
+	</b:row>
+	
+	 <br/>	
+	 <div class="row">	
+	 <b:column >	 
+	 <h4 align="center"><b><u><a href="ads.xhtml">New Ad</a></u></b></h4> 
+	 </b:column>
+	</div>
+	
+	</b:container>
+	</h:form>	
+
+</body> 
+</html>
+
+
+
+
+
+
+

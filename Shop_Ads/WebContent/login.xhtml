@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+<title>Login</title>
+  <meta charset="utf-8" content=""/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+ <link rel="stylesheet" type="text/css" href="css/style.css"/> 
+</h:head> 
+
+<h:body> 
+
+<div class="row">
+ 	 	<div class="col">
+			<div class="header" >
+ 				<h2 align="center">My Shop</h2>	
+			</div>
+	 	</div>
+	</div>
+
+<br/> 
+
+	<div class="row">
+ 		 <div class="col">
+  			<img src="img/shopping.jpg" alt="Shopping" class="center"/>
+  		</div>
+	</div>
+	
+<br/> 
+<h:messages styleClass="message"/> 
+<h:form id="loginForm">
+
+<div class="container"> 
+
+	 <div class="row">
+	 	<div class="col-sm-4">
+ 		 	<h:outputText value="Email"/> 
+ 		 </div>   
+ 		 <div class="col-sm-8">
+			 <h:inputText id="mail" value="#{loginBean.email}" styleClass="form-control" >
+			 </h:inputText> 
+		 </div>
+		 </div>
+	<div class="row">
+	 	<div class="col-sm-4">		
+			<h:outputText for="password" value="Password"/>  
+		</div>
+		<div class="col-sm-8">		
+			<h:inputSecret id="password" value="#{loginBean.password}" styleClass="form-control"  />
+		<h:message for="password" /> 
+		</div>
+ 	</div>
+ 	<br/>
+ 	<div class="row">
+  		<div class="col">
+                <h:commandButton value="Login" action="#{loginBean.login()}" styleClass="btn-default btn-lg center" />  
+    	</div>
+ 	</div>
+ 	<br/>
+ 	<div class="row">
+  		<div class="col">
+                <h5 align="center">If you don't have an account, please <a href="registerShop.xhtml">register.</a> </h5> 
+    	</div>
+ 	</div>
+             
+</div>
+   
+ </h:form>
+
+</h:body> 
+</html>

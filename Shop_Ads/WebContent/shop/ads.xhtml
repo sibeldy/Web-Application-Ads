@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+	  xmlns:of="http://omnifaces.org/functions"> 
+     
+<h:head>
+
+<title>Advertisement</title>
+  
+  <meta charset="utf-8" content=""/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+ 
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"/>
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/style.css"/> 
+	<script src="js/lib/jquery-3.1.1.js"></script>
+	<script type="text/javascript" src="bootstrap-datetimepicker.de.js" charset="UTF-8"></script>
+
+</h:head> 
+
+<h:body> 
+<link rel="stylesheet" href="/build/calendar.css"/>
+<script src="/build/calendar.full.min.js"></script>
+
+	<div class="row">
+ 	 	<div class="col">
+			<div id="info" class="header" align="center" >		
+ 				<b>Shop:</b> #{listShopAdsBean.loginBean.loggedInShop.shopName.toUpperCase()}, 
+ 				<b>Address:</b> #{listShopAdsBean.loginBean.loggedInShop.address}, 
+ 				<b>Tel:</b> #{listShopAdsBean.loginBean.loggedInShop.telephone},
+ 				<b>Category:</b> #{listShopAdsBean.loginBean.loggedInShop.category.category}
+			</div>
+	 	</div>
+	</div>
+	
+	<br/>
+	
+
+<div class="row">
+ 	 	<div class="col">
+			<div class="header" >
+ 				<h2 align="center"> Place an Ad </h2>	
+			</div>
+	 	</div>
+	</div>
+
+	<br/>
+	
+		<div class="row">
+ 		 <div class="col">
+  			<img src="../img/sale.jpg" alt="Advertisement" class="center"/>
+  		</div>
+	</div>
+	
+<h:messages styleClass="message"/> 
+
+	<h:form id="ads" enctype="multipart/form-data" >
+
+	<b:container > 
+	
+			 <b:row class="row" id="imagecont">
+			 	<b:column span="4">
+			 		<h:outputText for="picture" value="Select Picture"/>
+				</b:column>	 
+			 	 	
+			 	<b:column span="4">
+			 	<h:panelGrid columns="3">
+										 
+				<o:inputFile id="file" value="#{adsBean.file}">
+		            <f:ajax listener="#{adsBean.read()}" render="@form"/> 
+		        </o:inputFile>
+		  
+		        </h:panelGrid>	
+				 <o:graphicImage id="imagegrp" value="#{adsBean.content}" dataURI="true" width="100%" 
+		        rendered="#{not empty adsBean.content}" required="true"
+						requiredMessage="Choose a picture."/>			 				 
+				</b:column>
+				<b:column span="4"></b:column>		
+			</b:row>
+	
+		<br/>
+	
+	 <b:row class="row">
+	 	<b:column span="4" >	
+	 		<h:outputText for="productName" value="Product Name"/>
+	 	</b:column>
+	 	<b:column span="8">	
+			<b:inputText id="productName" value="#{adsBean.productName}" styleClass="form-control" required="true"
+				requiredMessage="Product name missing. "/>   
+		</b:column>
+	</b:row>
+	
+	<b:row class="row">
+	 	<b:column span="4" >	
+	 		<h:outputText for="description" value="Description"/>
+	 	</b:column>
+	 <b:column span="8" >		
+		 <b:inputTextarea id="description" value="#{adsBean.description}" styleClass="form-control" required="true"
+				requiredMessage="Product description missing."/>  
+	 </b:column>
+	</b:row>
+	
+	
+	<br/>	
+	 <b:row class="row">
+	 	<b:column span="4" >	
+ 			<h:outputText for="start" value="Start Time"/>
+ 		</b:column>
+ 		<b:column span="5" >
+  			<b:dateTimePicker format="DD MMM YYYY - HH:mm" value="#{adsBean.start}" required="true"
+				requiredMessage="Select start time." />
+  		</b:column>
+  		<b:column span="3" ></b:column>
+  		</b:row>
+  	 <br/>
+  	 <b:row class="row">
+	 	<b:column span="4">	 
+  			<h:outputText for="end" value="End Time"/>
+  		</b:column>
+	 	<b:column span="5" >	 
+  			<b:dateTimePicker format="DD MMM YYYY - HH:mm" value="#{adsBean.end}" required="true"
+				requiredMessage="Select end time. "/>
+		</b:column>
+		<b:column span="3"></b:column>
+  		</b:row>
+	 <br/>
+	 <b:row class="row">
+		<h:commandButton value="Save" styleClass="btn-default btn-lg center" action="#{adsBean.saveAd()}"/>
+		
+	 </b:row>
+	 <br/>	
+	 <div class="row">	
+	 <b:column >	 
+	 <h4 align="center"><b><u><a href="listShopAds.xhtml">List all ads</a></u></b></h4> 
+	 </b:column>
+	</div>
+	
+	 </b:container>
+	
+</h:form>
+</h:body> 
+</html>
